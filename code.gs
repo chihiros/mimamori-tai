@@ -1,7 +1,7 @@
 function doPost(e) {
   let json = JSON.parse(e.postData.getDataAsString());
   let message = getMessage(json);
-  let log = callSlackWebhook(message);
+  callSlackWebhook(message);
 }
 
 const MENTION = "<@suzurikawa_chihiro>";
@@ -20,16 +20,14 @@ Object.freeze(ACTIONS);
 function getMessage(json) {
   let message = "";
   if (isPublicRepository(json)) {
-    // publicリポジトリを作成、更新、削除した時の処理
     message = MENTION+"さん\n";
-    message += getSenderMassage(json);
+    message += getSenderMessage(json);
     message += getActionMessage(json);
     message += getRepositoryLink(json);
     return message;
   } else {
-    // privateリポジトリを作成、更新、削除した時の処理
     if (json["action"] === "privatized") {
-      message += getSenderMassage(json);
+      message += getSenderMessage(json);
       message = getActionMessage(json);
       message += getRepositoryLink(json);
       return message;
@@ -42,7 +40,7 @@ function isPublicRepository(json) {
 }
 
 function getSenderMessage(json) {
-  return json["sender"]["login"]+"さんが";
+  return "<"+json["sender"]["html_url"]+"|"+json["sender"]["login"]+">さんが";
 }
 
 function getActionMessage(json) {
