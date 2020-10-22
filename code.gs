@@ -7,11 +7,11 @@ function doPost(e) {
 const MENTION = "<@suzurikawa_chihiro>";
 const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
 const ACTIONS = {
-  "created"    :"publicリポジトリが作成された！！\n",
-  "publicized" :"publicリポジトリに変更された！！\n",
-  "transferred":"publicリポジトリが転送されてきた！！\n",
-  "privatized" :"privateリポジトリに変更してくれてありがとう\n",
-  "deleted"    :"publicリポジトリが削除されたよ\n"
+  "created"    :"publicリポジトリを作成したよ\n",
+  "publicized" :"publicリポジトリに変更したよ\n",
+  "transferred":"publicリポジトリを転送して来たよ\n",
+  "privatized" :"privateリポジトリに変更したよ\n",
+  "deleted"    :"publicリポジトリを削除したよ\n"
 };
 Object.freeze(MENTION);
 Object.freeze(SLACK_WEBHOOK_URL);
@@ -21,19 +21,15 @@ function getMessage(json) {
   let message = "";
   if (isPublicRepository(json)) {
     // publicリポジトリを作成、更新、削除した時の処理
-    if (json["action"] === "deleted") {
-      message = MENTION+"さん！！\n";
-      message += getActionMessage(json);
-      message += getRepositoryLink(json);
-      return message;
-    }
-    message = MENTION+"さん！！";//タイ変だよ！！\n";
+    message = MENTION+"さん\n";
+    message += getSenderMassage(json);
     message += getActionMessage(json);
     message += getRepositoryLink(json);
     return message;
   } else {
     // privateリポジトリを作成、更新、削除した時の処理
     if (json["action"] === "privatized") {
+      message += getSenderMassage(json);
       message = getActionMessage(json);
       message += getRepositoryLink(json);
       return message;
@@ -43,6 +39,10 @@ function getMessage(json) {
 
 function isPublicRepository(json) {
   return !json["repository"]["private"];
+}
+
+function getSenderMessage(json) {
+  return json["sender"]["login"]+"さんが";
 }
 
 function getActionMessage(json) {
