@@ -37,7 +37,6 @@ function getMessage(json) {
   }
 }
 
-
 function isPublicRepository(json) {
   return !json["repository"]["private"];
 }
