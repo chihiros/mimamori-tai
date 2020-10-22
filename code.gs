@@ -27,8 +27,8 @@ function getMessage(json) {
     return message;
   } else {
     if (json["action"] === "privatized") {
-      message += getSenderMessage(json);
-      message = getActionMessage(json);
+      message = getSenderMessage(json);
+      message += getActionMessage(json);
       message += getRepositoryLink(json);
       return message;
     }
