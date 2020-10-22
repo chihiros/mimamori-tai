@@ -1,14 +1,11 @@
 function doPost(e) {
-  console.log('Hello GAS World.');
   let json = JSON.parse(e.postData.getDataAsString());
-  console.log('Hello GAS World.');
-  console.log(json);
   let message = getMessage(json);
   let log = callSlackWebhook(message);
 }
 
 const MENTION = "<@suzurikawa_chihiro>";
-const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
+const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
 const ACTIONS = {
   "created"    :"publicリポジトリが作成された！！\n",
   "publicized" :"publicリポジトリに変更された！！\n",
@@ -30,7 +27,7 @@ function getMessage(json) {
       message += getRepositoryLink(json);
       return message;
     }
-    message = MENTION+"さん！！タイ変だよ！！\n";
+    message = MENTION+"さん！！";//タイ変だよ！！\n";
     message += getActionMessage(json);
     message += getRepositoryLink(json);
     return message;
