@@ -4,8 +4,8 @@ function doPost(e) {
   callSlackWebhook(message);
 }
 
-const MENTION = "<@suzurikawa_chihiro>";
-const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
+const MENTION = "<!channel>"; // <@user_id> // <!channel> // <!here>
+const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
 const ACTIONS = {
   "created"    :"publicリポジトリを作成したよ\n",
   "publicized" :"publicリポジトリに変更したよ\n",
