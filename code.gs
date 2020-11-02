@@ -5,7 +5,7 @@ function doPost(e) {
 }
 
 const MENTION = "<!channel>"; // <@user_id> // <!channel> // <!here>
-const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
+const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/*******/*******/****************';
 const ACTIONS = {
   "created"    :"publicリポジトリを作成したよ\n",
   "publicized" :"publicリポジトリに変更したよ\n",
